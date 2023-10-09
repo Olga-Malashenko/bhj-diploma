@@ -4,7 +4,7 @@
  * В первую очередь это открытие или
  * закрытие имеющихся окон
  * */
-class Modal {
+class Modal { 
   /**
    * Устанавливает текущий элемент в свойство element
    * Регистрирует обработчики событий с помощью Modal.registerEvents()
@@ -12,16 +12,26 @@ class Modal {
    * необходимо выкинуть ошибку.
    * */
   constructor(element){
-
+    if (!element) {
+      throw new Error('Нет элемента');
+    }
+    this.element = element;
+    this.registerEvents();
   }
-
+  
   /**
    * При нажатии на элемент с data-dismiss="modal"
    * должен закрыть текущее окно
    * (с помощью метода Modal.onClose)
    * */
   registerEvents() {
-
+    const dismissElements = this.element.querySelectorAll('[data-dismiss="modal"]'); // уточнить насчет data атрибутов
+    dismissElements.forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.onClose(e);
+      })
+    });
   }
 
   /**
@@ -29,19 +39,19 @@ class Modal {
    * Закрывает текущее окно (Modal.close())
    * */
   onClose(e) {
-
+    this.close(); // зачем этот ещё один промежуточный метод?
   }
   /**
    * Открывает окно: устанавливает CSS-свойство display
    * со значением «block»
    * */
   open() {
-
+    this.element.style.display = "block";
   }
   /**
    * Закрывает окно: удаляет CSS-свойство display
    * */
   close(){
-
+    this.element.style.display = "";
   }
 }

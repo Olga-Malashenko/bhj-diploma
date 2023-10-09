@@ -13,7 +13,11 @@ class AsyncForm {
    * через registerEvents()
    * */
   constructor(element) {
-
+    if (!element) {
+      throw new Error('Нет элемента');
+    }
+    this.element = element;
+    this.registerEvents();
   }
 
   /**
@@ -21,7 +25,18 @@ class AsyncForm {
    * вызывает метод submit()
    * */
   registerEvents() {
+    const forms = document.querySelectorAll('.form');
+    forms.forEach(item => {
+      item.addEventListener('submit', (e) => {
+        e.preventDefault();
+        item.submit();
+      })
+    })
+    // при saccess true
+     // preventDefault  и submit()
+     //if (response.success === true) {
 
+     //}
   }
 
   /**
@@ -44,6 +59,6 @@ class AsyncForm {
    * данные, полученные из метода getData()
    * */
   submit() {
-
+    this.onSubmit(this.getData());
   }
 }
