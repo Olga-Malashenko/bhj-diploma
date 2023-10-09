@@ -4,21 +4,30 @@
  * */
 const createRequest = (options = {}) => {
     const xhr = new XMLHttpRequest();
+    xhr.responseType = 'json';
+    const url = options.url;
+    console.log(`url из запроса ${url}`);
+    const formData = new FormData(); // here ?
     xhr.addEventListener('load', () => {
-        // логика обработки запроса через параметры
-        if (this.method === 'GET') {
-            xhr.open(options.method, ); // прописать с $ эту строку, через контент полей
-            xhr.send();
-        } else {
-            const formData = new FormData();
-            formData.append('name', /*textContent*/);
-            formData.append('mail', );
-            formData.append('password', );
-            xhr.open(options.method, options.url);
-            xhr.swnd(formData);
-        }
-        xhr.responseType = 'json';
-        //callback
+        // вызываем callback
+        // передаем объект ошибки/ответ от сервера xhr.response
     })
-    
+    if (this.method === 'GET') {
+        for (let item in options.data) {
+            url += item + '=' + options.data[item];
+            console.log(`накапливание адреса ${url}`);
+        }
+    } else {
+        for (let item in options.data) {
+            formData.append(item, options[item]);
+        }
+    }
+
+    try {
+        xhr.open(options.method, url);
+        xhr.send(formData);
+    }
+    catch (error) {
+        console.log(error);
+    }
 };

@@ -28,15 +28,14 @@ class AsyncForm {
     const forms = document.querySelectorAll('.form');
     forms.forEach(item => {
       item.addEventListener('submit', (e) => {
-        e.preventDefault();
-        item.submit();
+        if (response.success) {
+          e.preventDefault();
+          this.submit();
+        } else {
+          console.log('ошибка: нет ответа'); // пока так
+        }
       })
     })
-    // при saccess true
-     // preventDefault  и submit()
-     //if (response.success === true) {
-
-     //}
   }
 
   /**
@@ -47,10 +46,30 @@ class AsyncForm {
    * }
    * */
   getData() {
+    console.log(`вывод из гетДата асунка ${this.element.id}`);
+    const data = {};
+    /*const dataFromForm = this.element.querySelectorAll('.form-control');
+    
+    console.log(`перед ${data} и найденное ${dataFromForm}`);
+    for (let item of dataFromForm) {
+      console.log(`в цикле ${dataFromForm[item]}`);
+      let key = dataFromForm[item].name;
+      data[key] = dataFromForm[item].value;
+      console.log(`добавляется ${data}`);
+    }*/
 
+    const formData = new FormData(this.element);
+    const pairs = formData.entries();
+    console.log(pairs);
+    for (let item of pairs) {
+      data.item[0] = item[1];
+      console.log(`добавляется ${data}`);
+    }
+    console.log(`в итоге getData ${data}`);
+    return data;
   }
 
-  onSubmit(options){
+  onSubmit(options) {
 
   }
 
