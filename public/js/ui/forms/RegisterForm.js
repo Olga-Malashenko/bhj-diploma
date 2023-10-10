@@ -10,9 +10,10 @@ class RegisterForm extends AsyncForm {
    * и закрывает окно, в котором находится форма
    * */
   onSubmit(data) {
-    User.register(data);
-    App.setState('user-logged'); // после успешной регистрации
-    //Modal.onClose(App.getForm('register')); //  не поняла. напр, как указать окно и что в параметр
-    App.getForm('register').close();
+    User.register(data, callback); // что за колбэк??! видимо, он должен отдавать ответ
+    if (response.saccess) {
+      App.setState('user-logged');
+      App.getForm('register').close();
+    }
   }
 }

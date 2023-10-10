@@ -28,12 +28,12 @@ class AsyncForm {
     const forms = document.querySelectorAll('.form');
     forms.forEach(item => {
       item.addEventListener('submit', (e) => {
-        if (response.success) {
+        //if (response.success) {
           e.preventDefault();
           this.submit();
-        } else {
-          console.log('ошибка: нет ответа'); // пока так
-        }
+        //} else {
+         // console.log('ошибка: нет ответа'); // пока так
+       // }
       })
     })
   }
@@ -78,6 +78,6 @@ class AsyncForm {
    * данные, полученные из метода getData()
    * */
   submit() {
-    this.onSubmit(this.getData());
+    this.onSubmit(this.element.getData());
   }
 }
