@@ -11,9 +11,9 @@ class RegisterForm extends AsyncForm {
    * */
   onSubmit(data) {
     User.register(data, callback); // что за колбэк??! видимо, он должен отдавать ответ
-    if (response.saccess) {
+    //if (response.saccess) {
       App.setState('user-logged');
       App.getForm('register').close();
-    }
+    //}
   }
 }
