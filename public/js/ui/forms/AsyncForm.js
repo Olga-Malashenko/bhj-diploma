@@ -17,7 +17,7 @@ class AsyncForm {
       throw new Error('Нет элемента');
     }
     this.element = element;
-    console.log(this.element + ' : ' + this.element.name);
+    console.log(this.element + ' : ' + this.element.id);
     this.registerEvents();
   }
 
@@ -49,23 +49,23 @@ class AsyncForm {
   getData() {
     console.log(`вывод из гетДата асунка ${this.element.id}`);
     const data = {};
-    const dataFromForm = this.element.querySelectorAll('.form-control');
-    console.log(dataFromForm);
+    const dataFromForm = this.element.querySelectorAll('input');
+    console.log(`найденные инпуты ${dataFromForm}`);
     
     dataFromForm.forEach((item) => {
-      let key = dataFromForm.name;
+      let key = item.name;
       console.log(key);
-      data[key] = dataFromForm.value;
-      console.log(dataFromForm.value);
+      data[key] = item.value;
+      console.log(item.value);
     })
 
     console.log(`data  ${data}`);
 
-    const formData = new FormData(this.element);
-    console.log(`element now ${this.element}`);
+   // const formData = new FormData(this.element);
+    //console.log(`element now ${this.element}`);
    
     
-    console.log(`в итоге getData ${data}`);
+    //console.log(`в итоге getData ${data}`);
     return data;
   }
 

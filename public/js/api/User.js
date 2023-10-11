@@ -34,7 +34,7 @@ class User {
    * Получает информацию о текущем
    * авторизованном пользователе.
    * */
-  static fetch(callback) {
+  static fetch() { // callback
     createRequest({
       url: this.url + '/current',
       method: 'GET',
@@ -47,9 +47,10 @@ class User {
           console.log(err);
         }*/
         response.saccess ? this.setCurrent(response.user) : this.unsetCurrent(response.user);
-        this.data.callback(err, response);
+        
       })
     });
+    
   };
 
   /**
@@ -58,7 +59,7 @@ class User {
    * сохранить пользователя через метод
    * User.setCurrent.
    * */
-  static login(data, callback) { // callback... 
+  static login(data) { // callback... 
     createRequest({
       url: this.url + '/login',
       method: 'POST',
@@ -68,10 +69,11 @@ class User {
         if (response && response.user) {
           this.setCurrent(response.user);
         }
-        this.data.callback(err, response);
+        
       }
       
     });
+    //this.data.callback(err, response);
   }
 
   /**
@@ -80,7 +82,7 @@ class User {
    * сохранить пользователя через метод
    * User.setCurrent.
    * */
-  static register(data, callback) {
+  static register(data) { // callback
     createRequest({
       url: this.url + '/register',
       method: 'POST',
@@ -90,23 +92,29 @@ class User {
         if (response && response.user) {
           this.setCurrent(response.user);
         }
-        this.data.callback(err, response);
+        
       }
+      
     });
+    //this.data.callback(err, response);
   }
 
   /**
    * Производит выход из приложения. После успешного
    * выхода необходимо вызвать метод User.unsetCurrent
    * */
-  static logout(callback) {
-    const data = {
-      url: this.url + '/login',
+  static logout() {
+    createRequest({
+      url: this.url + '/logout',
       method: 'POST',
       responseType: 'json',
-    }
-    if (response.success) {
-      this.unsetCurrent(response.user);
-    }
+      callback: (err, response) => {
+        if (response.success) {
+          this.unsetCurrent(response.user);
+        }
+      }
+      //this.data.callback(err, response);
+    })
+    //this.data.callback(err, response);
   }
 }

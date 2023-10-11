@@ -10,10 +10,11 @@ class RegisterForm extends AsyncForm {
    * и закрывает окно, в котором находится форма
    * */
   onSubmit(data) {
-    User.register(data, callback); // что за колбэк??! видимо, он должен отдавать ответ
+    User.register(data); // callback что за колбэк??! видимо, он должен отдавать ответ
     //if (response.saccess) {
       App.setState('user-logged');
-      App.getForm('register').close();
+      const registerModal = App.getModal('register');
+      registerModal.close();
     //}
   }
 }
