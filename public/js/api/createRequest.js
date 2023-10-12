@@ -6,11 +6,12 @@ const createRequest = (options = {}) => {
     const xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
     const url = options.url;
-    console.log(`url  ${url}`);
+    //console.log(`url  ${url}`);
     const formData = new FormData();
-    const err = 'Ошибка'; // временно
+    //const err = 'Ошибка'; // временно
     xhr.addEventListener('load', () => {
-        const response = xhr.response;
+       const response = xhr.response;
+        const err = response.error;
         console.log(response);
         if (response.success) {
             options.callback(err,response);
@@ -24,9 +25,14 @@ const createRequest = (options = {}) => {
             url += item + '=' + options.data[item];
             console.log(`накапливание адреса ${url}`); // временно
         }
-    } else {    
-        for (let item in options.data) {
-            formData.append(item, options[item]);
+    } else {  
+        console.log(777)
+        console.log(options.data)
+        const currentObject = options.data;  
+        for (let property in currentObject) {
+            console.log(property, currentObject[property]);
+            //console.log(options[item]);
+            formData.append(property, currentObject[property]);
         }
     }
     try {

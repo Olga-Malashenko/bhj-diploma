@@ -17,7 +17,7 @@ class AsyncForm {
       throw new Error('Нет элемента');
     }
     this.element = element;
-    console.log(this.element + ' : ' + this.element.id);
+    //console.log(this.element + ' : ' + this.element.id);
     this.registerEvents();
   }
 
@@ -47,10 +47,10 @@ class AsyncForm {
    * }
    * */
   getData() {
-    console.log(`вывод из гетДата асунка ${this.element.id}`);
+    //console.log(`вывод из гетДата асунка ${this.element.id}`);
     const data = {};
     const dataFromForm = this.element.querySelectorAll('input');
-    console.log(`найденные инпуты ${dataFromForm}`);
+    //console.log(`найденные инпуты ${dataFromForm}`);
     
     dataFromForm.forEach((item) => {
       let key = item.name;
@@ -60,17 +60,11 @@ class AsyncForm {
     })
 
     console.log(`data  ${data}`);
-
-   // const formData = new FormData(this.element);
-    //console.log(`element now ${this.element}`);
-   
-    
-    //console.log(`в итоге getData ${data}`);
     return data;
   }
 
   onSubmit(options) {
-
+    //console.log(`options : ${options}`);
   }
 
   /**
@@ -78,6 +72,8 @@ class AsyncForm {
    * данные, полученные из метода getData()
    * */
   submit() {
-    this.onSubmit(this.getData());
+    const dataX = this.getData();
+    console.log(`dataX ${dataX}`);
+    this.onSubmit(dataX);
   }
 }

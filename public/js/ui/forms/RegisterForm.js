@@ -10,11 +10,30 @@ class RegisterForm extends AsyncForm {
    * и закрывает окно, в котором находится форма
    * */
   onSubmit(data) {
-    User.register(data); // callback что за колбэк??! видимо, он должен отдавать ответ
-    //if (response.saccess) {
-      App.setState('user-logged');
-      const registerModal = App.getModal('register');
+    console.log(data);
+    User.register(data, (err, response) => {
+      if (response.success) {
+        App.setState('user-logged');
+        const registerModal = App.getModal('register');
+      const input = document.querySelector('#register-form');
+      input.reset();
       registerModal.close();
+        //const loginModal = App.getModal('login');
+        //loginModal.reset();
+        //loginModal.close();
+        //this.unsetCurrent(response.user);
+        //console.log('logout +')
+        //App.setState('init');
+      } else {
+        console.log(err);
+      }
+    });
+    //if (response.saccess) {
+      //App.setState('user-logged');
+      //const registerModal = App.getModal('register');
+      //const input = document.querySelector('#register-form');
+      //input.reset();
+      //registerModal.close();
     //}
   }
 }
