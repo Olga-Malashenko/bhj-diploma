@@ -17,7 +17,6 @@ class AsyncForm {
       throw new Error('Нет элемента');
     }
     this.element = element;
-    //console.log(this.element + ' : ' + this.element.id);
     this.registerEvents();
   }
 
@@ -30,11 +29,9 @@ class AsyncForm {
     forms.forEach(item => {
       item.addEventListener('submit', (e) => {
         //if (response.success) {
-          e.preventDefault();
-          this.submit();
-        //} else {
-         // console.log('ошибка: нет ответа'); // пока так
-       // }
+        e.preventDefault();
+        this.submit();
+        //}
       })
     })
   }
@@ -47,24 +44,16 @@ class AsyncForm {
    * }
    * */
   getData() {
-    //console.log(`вывод из гетДата асунка ${this.element.id}`);
     const data = {};
     const dataFromForm = this.element.querySelectorAll('input');
-    //console.log(`найденные инпуты ${dataFromForm}`);
-    
     dataFromForm.forEach((item) => {
       let key = item.name;
-      console.log(key);
       data[key] = item.value;
-      console.log(item.value);
     })
-
-    console.log(`data  ${data}`);
     return data;
   }
 
   onSubmit(options) {
-    //console.log(`options : ${options}`);
   }
 
   /**
@@ -72,8 +61,6 @@ class AsyncForm {
    * данные, полученные из метода getData()
    * */
   submit() {
-    const dataX = this.getData();
-    console.log(`dataX ${dataX}`);
-    this.onSubmit(dataX);
+    this.onSubmit(this.getData());
   }
 }

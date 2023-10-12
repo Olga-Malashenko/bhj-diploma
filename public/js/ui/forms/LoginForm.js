@@ -14,17 +14,12 @@ class LoginForm extends AsyncForm {
       if (response.success) {
         App.setState('user-logged');
         const loginModal = App.getModal('login');
-        //loginModal.reset();
+        const input = document.querySelector('#login-form');
+        input.reset();
         loginModal.close();
-        //this.unsetCurrent(response.user);
-        //console.log('logout +')
-        //App.setState('init');
       } else {
         console.log(err);
       }
     });
-    //if (response.saccess) {
-
-    // }
   }
 }

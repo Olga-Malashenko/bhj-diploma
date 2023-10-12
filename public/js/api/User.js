@@ -34,12 +34,11 @@ class User {
    * Получает информацию о текущем
    * авторизованном пользователе.
    * */
-  static fetch(callback) { // callback
+  static fetch(callback) {
     createRequest({
       url: this.url + '/current',
       method: 'GET',
       callback: ((err, response) => {
-        //console.log( 'Ошибка, если есть', err );
         if (response.saccess) {
           this.setCurrent(response.user);
         } else {
@@ -47,10 +46,11 @@ class User {
           console.log(err);
         }
         //response.saccess ? this.setCurrent(response.user) : this.unsetCurrent(response.user);
+        callback(err, response);
       }
       )
     });
-    //this.data.callback(err, response);
+
   };
 
   /**
@@ -59,14 +59,14 @@ class User {
    * сохранить пользователя через метод
    * User.setCurrent.
    * */
-  static login(data, callback) { // callback... 
+  static login(data, callback) {
     createRequest({
       url: this.url + '/login',
       method: 'POST',
       responseType: 'json',
       data,
       callback: (err, response) => {
-        if (response && response.user) {
+        if (response.success) {
           this.setCurrent(response.user);
         } else {
           console.log(err);
@@ -74,7 +74,6 @@ class User {
         callback(err, response);
       }
     });
-    //this.data.callback(err, response);
   }
 
   /**
@@ -83,14 +82,14 @@ class User {
    * сохранить пользователя через метод
    * User.setCurrent.
    * */
-  static register(data, callback) { // callback
+  static register(data, callback) {
     createRequest({
       url: this.url + '/register',
       method: 'POST',
       responseType: 'json',
       data,
       callback: (err, response) => {
-        if (response && response.user) {
+        if (response.success) {
           this.setCurrent(response.user);
         } else {
           console.log(err);
@@ -98,7 +97,6 @@ class User {
         callback(err, response);
       }
     });
-    //this.data.callback(err, response);
   }
 
   /**
@@ -106,7 +104,6 @@ class User {
    * выхода необходимо вызвать метод User.unsetCurrent
    * */
   static logout(callback) {
-    //let err, response;
     createRequest({
       url: this.url + '/logout',
       method: 'POST',
@@ -114,15 +111,11 @@ class User {
       callback: (err, response) => {
         if (response.success) {
           this.unsetCurrent(response.user);
-          //console.log('logout +')
         } else {
           console.log(err);
         }
-        callback(err, response); 
-      } 
-      
+        callback(err, response);
+      }
     })
-    
-    
   }
 }

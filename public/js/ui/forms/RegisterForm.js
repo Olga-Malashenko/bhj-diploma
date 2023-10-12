@@ -15,25 +15,12 @@ class RegisterForm extends AsyncForm {
       if (response.success) {
         App.setState('user-logged');
         const registerModal = App.getModal('register');
-      const input = document.querySelector('#register-form');
-      input.reset();
-      registerModal.close();
-        //const loginModal = App.getModal('login');
-        //loginModal.reset();
-        //loginModal.close();
-        //this.unsetCurrent(response.user);
-        //console.log('logout +')
-        //App.setState('init');
+        const input = document.querySelector('#register-form');
+        input.reset();
+        registerModal.close();
       } else {
         console.log(err);
       }
     });
-    //if (response.saccess) {
-      //App.setState('user-logged');
-      //const registerModal = App.getModal('register');
-      //const input = document.querySelector('#register-form');
-      //input.reset();
-      //registerModal.close();
-    //}
   }
 }

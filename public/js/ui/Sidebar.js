@@ -40,30 +40,25 @@ class Sidebar {
     const loginModal = App.getModal('login');
     const registerModal = App.getModal('register');
 
-    registerBtn.addEventListener('click', (e)=> {
+    registerBtn.addEventListener('click', (e) => {
       e.preventDefault();
       registerModal.open();
     })
 
-    loginBtn.addEventListener('click', (e)=> {
+    loginBtn.addEventListener('click', (e) => {
       e.preventDefault();
       loginModal.open();
     })
 
-    logoutBtn.addEventListener('click', (e)=> {
+    logoutBtn.addEventListener('click', (e) => {
       e.preventDefault();
       User.logout((err, response) => {
         if (response.success) {
-          //this.unsetCurrent(response.user);
-          //console.log('logout +')
           App.setState('init');
         } else {
           console.log(err);
         }
-      } );
-      //if (response.success) {
-        //App.setState('init');
-      //}
+      });
     })
 
   }
